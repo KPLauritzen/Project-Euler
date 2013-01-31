@@ -28,15 +28,18 @@ origMat = mat.copy()
 size = 80
 # Testing graphs with networkx
 G = nx.DiGraph()
-
-for i in range(size):
-    for j in range(size):
-        G.add_edge((i,j), (i+1,j), weight=mat[i,j])
-        G.add_edge((i,j), (i,j+1), weight=mat[i,j])
-
-
-for i in range(size):
-    G.remove_node((i,size))
-    G.remove_node((size,i))
+def main():
+    for i in range(size):
+        for j in range(size):
+            G.add_edge((i,j), (i+1,j), weight=mat[i,j])
+            G.add_edge((i,j), (i,j+1), weight=mat[i,j])
 
 
+    for i in range(size):
+        G.remove_node((i,size))
+        G.remove_node((size,i))
+    
+    print nx.shortest_path_length(G, (0,0), (size-1,size-1), weight='weight')
+
+if __name__ == "__main__":
+    main()
